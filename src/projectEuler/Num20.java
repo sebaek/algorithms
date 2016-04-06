@@ -1,91 +1,24 @@
 package projectEuler;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigInteger;
 
 public class Num20 {
-	static Map<Long, Long> factors = new HashMap<>();
-	static List<Long> primes = new ArrayList<>();
-
-	
-
 	public static void main(String[] args) {
-		primes.add(2l);
-		for (int i = 2; i <= 100; i++) {
-			factors(i);
+		BigInteger result = BigInteger.ONE;
+		for (int i = 1; i <= 100; i++) {
+			result = result.multiply(BigInteger.valueOf(i));
 		}
-		System.out.println(factors);
+		System.out.println(result);
 		
-		factors.put(2l, factors.get(2l) - factors.get(5l));
-		factors.remove(5l);
-//		factors.remove(1l);
-		
-		System.out.println(factors);
-		
-	}
-	
-	public static void factors(long target) {
-		
-		System.out.print("target : " + target + "\t");
-		
-		
-//		long target = originaltarget;
-		long sqrtOfTarget = (long) Math.sqrt(target);
-		
-		int cursor = 0;
-		while (cursor < primes.size()) {
-			long prime = primes.get(cursor);
-			if (prime <= sqrtOfTarget) {
-				if (target % prime == 0) {
-//					factors.add(prime);
-					addToMap(prime);
-					target = target / prime;
-					sqrtOfTarget = (long) Math.sqrt(target);
-				} else {
-					cursor++;
-					if (cursor == primes.size()) {
-						nextPrime();
-					}
-				}
-			} else {
-//				factors.add(target);
-				addToMap(target);
-				break;
-			}
+		long sum = 0;
+		while (!result.equals(BigInteger.ZERO)) {
+			BigInteger[] dr = result.divideAndRemainder(BigInteger.TEN);
+			result = dr[0];
+			sum += dr[1].longValue();
 		}
 		
-		System.out.println(factors);
-		
-//		return factors;
-	}
-	
-	private static void addToMap(Long prime) {
+		System.out.println(sum);
 
-		if (factors.containsKey(prime)) {
-			factors.put(prime, factors.get(prime) + 1);
-		} else {
-			factors.put(prime, 1l);
-		}
 	}
-	public static void nextPrime() {
-		long candidate = primes.get(primes.size()-1) + 1;
-		
-		outter:
-		for (;candidate <= Integer.MAX_VALUE; candidate++) {
-			long root = (long) Math.sqrt(candidate);
-			for (long prime : primes) {
-				if (prime <= root) {
-					if (candidate % prime == 0) {
-						continue outter;
-					}
-				} else {
-					primes.add(candidate);
-					return;
-				}
-			}
-		}
-		
-	}
+
 }
