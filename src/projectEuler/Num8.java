@@ -17,6 +17,8 @@ public class Num8 {
 		System.out.println(result4 == 14l);
 		
 		
+		
+		
 	}
 	
 	public static long solution(char[] digits) {
