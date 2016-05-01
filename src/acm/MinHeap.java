@@ -7,22 +7,26 @@ public class MinHeap {
      
     public static void main(String[] args) {
  
-        Scanner scanner = new Scanner(System.in);
+//        Scanner scanner = new Scanner(System.in);
          
-        int lines = scanner.nextInt();
+//        int lines = scanner.nextInt();
+    	int lines = 100000;
+    	long start = System.currentTimeMillis();
+    	Random rand = new Random(System.currentTimeMillis());
          
         Heap heap = new Heap();
         for (int i = 1; i <= lines; i++) {
-            long e = scanner.nextLong();
+            long e = rand.nextLong();
             if (e == 0) {
                 long min = heap.removeMin();
-                System.out.println(min);
+//                System.out.println(min);
             } else {
                 heap.add(e);
             }
         }
+        System.out.println(System.currentTimeMillis() - start);
          
-        scanner.close();
+//        scanner.close();
          
     }
      
